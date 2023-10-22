@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { RepositoryInfoCard } from "../components/RepositoryInfoCard";
-import { useTrendingRepositoriesQuery } from "../queries/useTrendingRepositoriesQuery";
-import { Page } from "../components/Page";
+import { RepositoryInfoCard } from "../../components/RepositoryInfoCard";
+import { Page } from "../../components/Page";
+import { useTrendingRepositories } from "../../state/TrendingRepositories/hooks/useTrendingRepositories";
+import { useSetup } from "./hooks/useSetup";
 
 const ScrollSection = styled.div`
   display: flex;
@@ -13,7 +14,8 @@ const ScrollSection = styled.div`
 `;
 
 export const HomePage = () => {
-  const query = useTrendingRepositoriesQuery();
+  const query = useSetup();
+  const { trending } = useTrendingRepositories();
 
   if (query.isLoading) {
     return <>...loading</>;
@@ -23,12 +25,12 @@ export const HomePage = () => {
     <Page>
       <h3>Trending repositories</h3>
       <ScrollSection>
-        {query.data?.data.items.map((s) => (
+        {trending.map((s) => (
           <RepositoryInfoCard
             key={s.id}
             name={s.name}
-            githubLink={s.html_url}
-            numberOfStars={s.stargazers_count}
+            githubLink={s.url}
+            numberOfStars={s.stars}
             description={s.description}
           />
         ))}
