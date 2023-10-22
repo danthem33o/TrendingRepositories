@@ -1,0 +1,102 @@
+{
+  "total_count": 12,
+  "incomplete_results": false,
+  "items": [
+    {
+      "id": 1,
+      "name": "Repository 1",
+      "html_url": "https://example.com/repository1",
+      "description": "This is the repository for one",
+      "stargazers_count": 3643,
+      "created_at": "2023-10-17T04:48:46Z"
+    },
+    {
+      "id": 2,
+      "name": "Repository 2",
+      "html_url": "https://example.com/repository2",
+      "description": "This is the repository for two",
+      "stargazers_count": 897,
+      "created_at": "2023-10-15T12:08:17Z"
+    },
+    {
+      "id": 3,
+      "name": "Repository 3",
+      "html_url": "https://example.com/repository3",
+      "description": "This is the repository for three",
+      "stargazers_count": 90,
+      "created_at": "2023-10-17T06:49:59Z"
+    },
+    {
+      "id": 4,
+      "name": "Repository 4",
+      "html_url": "https://example.com/repository4",
+      "description": "This is the repository for four",
+      "stargazers_count": 3224,
+      "created_at": "2023-10-19T05:06:50Z"
+    },
+    {
+      "id": 5,
+      "name": "Repository 5",
+      "html_url": "https://example.com/repository5",
+      "description": "This is the repository for five",
+      "stargazers_count": 3224,
+      "created_at": "2023-10-16T08:11:21Z"
+    },
+    {
+      "id": 6,
+      "name": "Repository 6",
+      "html_url": "https://example.com/repository6",
+      "description": "",
+      "stargazers_count": 23,
+      "created_at": "2023-10-17T08:15:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Repository 7",
+      "html_url": "https://example.com/repository7",
+      "description": "This is the repository for seven",
+      "stargazers_count": 0,
+      "created_at": "2023-10-15T15:54:45Z"
+    },
+    {
+      "id": 8,
+      "name": "Repository 8",
+      "html_url": "https://example.com/repository8",
+      "description": "This is the repository for eight",
+      "stargazers_count": 234,
+      "created_at": "2023-10-15T12:58:22Z"
+    },
+    {
+      "id": 9,
+      "name": "Repository 9",
+      "html_url": "https://example.com/repository9",
+      "description": "This is the repository for nine",
+      "stargazers_count": 0,
+      "created_at": "2023-10-16T03:39:26Z"
+    },
+    {
+      "id": 10,
+      "name": "Repository 10",
+      "html_url": "https://example.com/repository10",
+      "description": "This is the repository for ten",
+      "stargazers_count": 436,
+      "created_at": "2023-10-16T03:39:26Z"
+    },
+    {
+      "id": 11,
+      "name": "Repository 11",
+      "html_url": "https://example.com/repository11",
+      "description": "This is the repository for eleven",
+      "stargazers_count": 34,
+      "created_at": "2023-10-15T03:46:21Z"
+    },
+    {
+      "id": 12,
+      "name": "Repository 12",
+      "html_url": "https://example.com/repository12",
+      "description": "This is the repository for twelve",
+      "stargazers_count": 0,
+      "created_at": "2023-10-15T12:14:18Z"
+    }
+  ]
+}
