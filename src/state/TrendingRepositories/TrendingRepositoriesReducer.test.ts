@@ -87,4 +87,27 @@ describe("TrendingRepositoriesReducer", () => {
     // ASSERT:
     expect(state.favourites).toEqual(expected);
   });
+
+  test("It unfavourites a repository", () => {
+    // ARRANGE:
+    const expectedId = 1;
+
+    const action: TrendingRepositoriesAction = {
+      type: "UNFAVOURITE",
+      payload: {
+        repositoryId: expectedId,
+      },
+    };
+
+    const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
+      favourites: [expectedId],
+    };
+
+    // ACT:
+    const state = TrendingRepositoriesReducer(initial, action);
+
+    // ASSERT:
+    expect(state.favourites).not.toContain(expectedId);
+  });
 });

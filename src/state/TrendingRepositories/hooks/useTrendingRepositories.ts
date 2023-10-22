@@ -1,5 +1,6 @@
 import { useFavouriteRepository } from "../actions/useFavouriteRepository";
 import { useInitialise } from "../actions/useInitialise";
+import { useUnfavouriteRepository } from "../actions/useUnfavouriteRepository";
 import { useFavouritedSelector } from "../selectors/useFavouritedSelector";
 import { useIsRepositoryFavouritedSelector } from "../selectors/useIsRepositoryFavouritedSelector";
 import { useTrendingRepositoriesSelector } from "../selectors/useTrendingRepositoriesSelector";
@@ -15,6 +16,7 @@ export const useTrendingRepositories = () => {
   return {
     initialise,
     useFavouriteRepository,
+    useUnfavouriteRepository,
     trending,
     favourites,
     checkIsFavourited,

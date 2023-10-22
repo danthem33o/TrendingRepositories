@@ -130,4 +130,40 @@ describe("LocalStorageApi", () => {
       expect(result).toEqual({ data: expected });
     });
   });
+
+  describe("DELETE", () => {
+    test("it removes a favourite repository", async () => {
+      // ARRANGE:
+      const expected = [
+        {
+          ownerName: "Hello",
+          repoName: "Again",
+        },
+      ];
+
+      Storage.prototype.getItem = jest.fn().mockReturnValue(
+        JSON.stringify([
+          {
+            ownerName: "Hello",
+            repoName: "World",
+          },
+          ...expected,
+        ])
+      );
+
+      const localStorageApi = new LocalStoragApi();
+
+      // ACT:
+      await localStorageApi.delete(
+        "https://api.github.com/user/starred/Hello/World"
+      );
+
+      // ASSERT:
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toHaveBeenCalledWith(
+        "favourites",
+        JSON.stringify(expected)
+      );
+    });
+  });
 });

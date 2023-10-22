@@ -79,19 +79,27 @@ export const RepositoryInfoCard = ({
   numberOfStars,
   description,
 }: RepositoryInfoCardProps) => {
-  const { useFavouriteRepository, checkIsFavourited } =
-    useTrendingRepositories();
+  const {
+    useFavouriteRepository,
+    useUnfavouriteRepository,
+    checkIsFavourited,
+  } = useTrendingRepositories();
 
-  const query = useFavouriteRepository(id);
-
-  const onFavourited = useCallback(() => {
-    query.mutate({ ownerName, repoName: name });
-  }, [query, ownerName, name]);
+  const favouriteQuery = useFavouriteRepository(id);
+  const unFavouriteQuery = useUnfavouriteRepository(id);
 
   const isFavourited = useMemo(
     () => checkIsFavourited(id),
     [checkIsFavourited, id]
   );
+
+  const onFavourited = useCallback(() => {
+    if (isFavourited) {
+      unFavouriteQuery.mutate({ ownerName, repoName: name });
+    } else {
+      favouriteQuery.mutate({ ownerName, repoName: name });
+    }
+  }, [isFavourited, unFavouriteQuery, ownerName, name, favouriteQuery]);
 
   return (
     <Border aria-label="Repository information">
@@ -118,7 +126,7 @@ export const RepositoryInfoCard = ({
           <button
             onClick={onFavourited}
             aria-label="Favourite repository"
-            disabled={query.isPending}
+            disabled={favouriteQuery.isPending || unFavouriteQuery.isPending}
           >
             {isFavourited ? "Favourited" : "Favourite"}
           </button>

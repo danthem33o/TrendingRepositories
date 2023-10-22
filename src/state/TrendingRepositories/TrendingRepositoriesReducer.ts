@@ -26,6 +26,23 @@ export const TrendingRepositoriesReducer = (
         favourites,
       };
     }
+    case "UNFAVOURITE": {
+      const { repositoryId } = action.payload;
+
+      const index = state.favourites.indexOf(repositoryId);
+
+      if (!~index) {
+        return state;
+      }
+
+      const favourites = Array.from(state.favourites);
+      favourites.splice(index, 1);
+
+      return {
+        ...state,
+        favourites,
+      };
+    }
     default:
       return state;
   }

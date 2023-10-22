@@ -23,4 +23,9 @@ export class StarApi {
     const url = this.baseUrl + `/${ownerName}/${repoName}`;
     return this.api.put(encodeURI(url), { ownerName, repoName });
   }
+
+  public unstarARepository(ownerName: string, repoName: string) {
+    const url = this.baseUrl + `/${ownerName}/${repoName}`;
+    return this.api.delete(url);
+  }
 }

@@ -4,6 +4,7 @@ import { StarApi } from "./StarApi";
 const ApiMock: ApiClient = {
   get: jest.fn(),
   put: jest.fn(),
+  delete: jest.fn(),
 };
 
 describe("StarApi", () => {
@@ -37,6 +38,24 @@ describe("StarApi", () => {
     expect(ApiMock.get).toBeCalledTimes(1);
     expect(ApiMock.get).toBeCalledWith(
       encodeURI("https://api.github.com/user/starred")
+    );
+  });
+
+  test("It can unstar repositories", () => {
+    // ARRANGE:
+    const starApi = new StarApi(ApiMock);
+    const expectedOwnerName = "TheOwner";
+    const expectedRepoName = "TheRepo";
+
+    // ACT:
+    starApi.unstarARepository(expectedOwnerName, expectedRepoName);
+
+    // ASSERT:
+    expect(ApiMock.delete).toBeCalledTimes(1);
+    expect(ApiMock.delete).toBeCalledWith(
+      encodeURI(
+        `https://api.github.com/user/starred/${expectedOwnerName}/${expectedRepoName}`
+      )
     );
   });
 });

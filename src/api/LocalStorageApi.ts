@@ -26,7 +26,31 @@ const getItems = (key: string) => {
   return storedItems ? JSON.parse(storedItems) : [];
 };
 
+const removeFavourite = (url: string) => {
+  const segments = url
+    .split("https://api.github.com/user/starred/")[1]
+    .split("/");
+
+  let favourites: StarredRepository[] = getItems(FAVOURITES_KEY);
+
+  favourites = favourites.filter(
+    (s) => !(s.ownerName === segments[0] && s.repoName === segments[1])
+  );
+
+  localStorage.setItem(FAVOURITES_KEY, JSON.stringify(favourites));
+};
+
 export class LocalStoragApi implements ApiClient {
+  public delete<TResponse>(url: string): Promise<TResponse> {
+    if (url.match("https://api.github.com/user/starred/")) {
+      removeFavourite(url);
+    } else {
+      localStorage.removeItem(DEFAULT_KEY);
+    }
+
+    return new Promise((resolve) => resolve({} as TResponse));
+  }
+
   public get<TData>(url: string): Promise<ApiResponse<TData>> {
     switch (url) {
       case "https://api.github.com/user/starred": {

@@ -4,6 +4,7 @@ import { ApiClient } from "../types";
 const ApiMock: ApiClient = {
   get: jest.fn(),
   put: jest.fn(),
+  delete: jest.fn(),
 };
 
 describe("SearchRepositoriesApi", () => {

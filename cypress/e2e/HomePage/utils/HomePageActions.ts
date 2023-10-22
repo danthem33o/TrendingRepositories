@@ -38,6 +38,15 @@ export const HomePageActions = {
         .findByRole("button", { name: "Favourite repository" })
         .click();
     },
+    unFavourite: (target: string) => {
+      cy.findByText("Trending repositories")
+        .next()
+        .findByText(target)
+        .parent()
+        .parent()
+        .findByRole("button", { name: "Favourite repository" })
+        .click();
+    },
   },
   favouritedRepositories: {
     doesExist: (target: string) =>
@@ -46,5 +55,11 @@ export const HomePageActions = {
         .next()
         .findByText(target)
         .should("exist"),
+    doesNotExist: (target: string) =>
+      cy
+        .findByText("Favourited repositories")
+        .next()
+        .findByText(target)
+        .should("not.exist"),
   },
 };
