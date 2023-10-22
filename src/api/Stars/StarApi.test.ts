@@ -25,4 +25,18 @@ describe("StarApi", () => {
       { ownerName: expectedOwnerName, repoName: expectedRepoName }
     );
   });
+
+  test("It can get starred repositories", () => {
+    // ARRANGE:
+    const starApi = new StarApi(ApiMock);
+
+    // ACT:
+    starApi.get();
+
+    // ASSERT:
+    expect(ApiMock.get).toBeCalledTimes(1);
+    expect(ApiMock.get).toBeCalledWith(
+      encodeURI("https://api.github.com/user/starred")
+    );
+  });
 });

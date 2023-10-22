@@ -30,13 +30,13 @@ describe("useInitialise", () => {
     ];
 
     // ACT:
-    renderHook(() => useInitialise()(expected));
+    renderHook(() => useInitialise()(expected, [1]));
 
     // ASSERT:
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith({
       type: "TRENDING_INIT",
-      payload: { trending: expected, favourites: [] },
+      payload: { trending: expected, favourites: [1] },
     });
   });
 });

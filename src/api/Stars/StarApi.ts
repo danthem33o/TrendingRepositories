@@ -1,4 +1,5 @@
 import { ApiClient } from "../types";
+import { StarredRepository } from "./types";
 
 export class StarApi {
   public constructor(private api: ApiClient) {
@@ -6,6 +7,10 @@ export class StarApi {
   }
 
   private baseUrl: string;
+
+  public get() {
+    return this.api.get<StarredRepository[]>(this.baseUrl);
+  }
 
   /**
    * Stars a repository.

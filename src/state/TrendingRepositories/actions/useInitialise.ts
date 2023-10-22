@@ -5,12 +5,12 @@ import { Repository } from "../types";
 export const useInitialise = () => {
   const { dispatch } = useStateContext();
   return useCallback(
-    (trending: Repository[]) => {
+    (trending: Repository[], favourites: number[]) => {
       dispatch({
         type: "TRENDING_INIT",
         payload: {
           trending,
-          favourites: [],
+          favourites,
         },
       });
     },
