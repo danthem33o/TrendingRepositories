@@ -15,7 +15,7 @@ const ScrollSection = styled.div`
 
 export const HomePage = () => {
   const query = useSetup();
-  const { trending } = useTrendingRepositories();
+  const { trending, favourites } = useTrendingRepositories();
 
   if (query.isLoading) {
     return <>...loading</>;
@@ -26,6 +26,20 @@ export const HomePage = () => {
       <h3>Trending repositories</h3>
       <ScrollSection>
         {trending.map((s) => (
+          <RepositoryInfoCard
+            key={s.id}
+            id={s.id}
+            name={s.name}
+            ownerName={s.owner.name}
+            githubLink={s.url}
+            numberOfStars={s.stars}
+            description={s.description}
+          />
+        ))}
+      </ScrollSection>
+      <h3>Favourited repositories</h3>
+      <ScrollSection>
+        {favourites.map((s) => (
           <RepositoryInfoCard
             key={s.id}
             id={s.id}

@@ -29,5 +29,22 @@ export const HomePageActions = {
         .parent()
         .should("contain", noOfStars);
     },
+    favourite: (target: string) => {
+      cy.findByText("Trending repositories")
+        .next()
+        .findByText(target)
+        .parent()
+        .parent()
+        .findByRole("button", { name: "Favourite repository" })
+        .click();
+    },
+  },
+  favouritedRepositories: {
+    doesExist: (target: string) =>
+      cy
+        .findByText("Favourited repositories")
+        .next()
+        .findByText(target)
+        .should("exist"),
   },
 };
