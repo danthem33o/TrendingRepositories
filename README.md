@@ -6,13 +6,21 @@ This project helps discover trending repositories that were created in the last 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-It uses [styled-components](https://styled-components.com/) for theming and styles. Re-usable components can be found in the `components` folder.
+### Styles
+
+It uses [styled-components](https://styled-components.com/) for theming and styling. Re-usable components can be found in the `components` folder.
+
+### APIs
 
 APIs can be found under the `api` directory. [axios](https://axios-http.com/docs/intro) is used as the HTTP client.
 
+### State
+
+Application state can be found under `state`. State is encapsulated and can only be retrieved by using the `useStateContext` hook. Slices of state are split across multiple repositories and can only be accessed or updated by action and selector hooks. Action and selector hooks are re-exported from a single hook that is consumed by the application.
+
 ## Testing
 
-Test files are saved with the postfix of either `**.spec.ts` or `**.test.ts`. [Cypress](https://www.cypress.io/) is the test automation library used to provide the end-to-end tests. Please see the commands below on how to run the end-to-end tests. [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro/) has been used to provide further Cypress commands.
+Test files are saved with the postfix of either `**.spec.ts`, `**.test.ts` or `**.test.tsx`. [Cypress](https://www.cypress.io/) is the test automation library used to provide the end-to-end tests. Please see the commands below on how to run the end-to-end tests. [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro/) has been used to provide further Cypress commands.
 
 Cypress tests can be found in `./cypress/e2e`.
 
