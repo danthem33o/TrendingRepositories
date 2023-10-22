@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import * as StateProvider from "../../context/StateProvider";
 import { useInitialise } from "./useInitialise";
+import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
 
 describe("useInitialise", () => {
   test("first action with expected payload", () => {
@@ -8,6 +9,7 @@ describe("useInitialise", () => {
     const mockDispatch = jest.fn();
     jest.spyOn(StateProvider, "useStateContext").mockReturnValue({
       state: {
+        ...trendingRepositoriesInitialState,
         trending: [],
       },
       dispatch: mockDispatch,
@@ -31,7 +33,7 @@ describe("useInitialise", () => {
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith({
       type: "TRENDING_INIT",
-      payload: { trending: expected },
+      payload: { trending: expected, favourites: [] },
     });
   });
 });

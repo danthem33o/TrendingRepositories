@@ -1,3 +1,4 @@
+import { trendingRepositoriesInitialState } from "./trendingRepositoriesInitialState";
 import { TrendingRepositoriesReducer } from "./TrendingRepositoriesReducer";
 import {
   TrendingRepositoriesAction,
@@ -8,6 +9,7 @@ describe("TrendingRepositoriesReducer", () => {
   test("It can initialise the trending repositories", () => {
     // ARRANGE:
     const expected: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
       trending: [
         {
           id: 1,
@@ -21,6 +23,7 @@ describe("TrendingRepositoriesReducer", () => {
     };
 
     const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
       trending: [],
     };
 
@@ -34,5 +37,51 @@ describe("TrendingRepositoriesReducer", () => {
 
     // ASSERT
     expect(state).toEqual(expected);
+  });
+
+  test("It can favourite a repository", () => {
+    // ARRANGE:
+    const expectedId = 1;
+
+    const action: TrendingRepositoriesAction = {
+      type: "FAVOURITE",
+      payload: {
+        repositoryId: expectedId,
+      },
+    };
+
+    const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
+      favourites: [],
+    };
+
+    // ACT:
+    const state = TrendingRepositoriesReducer(initial, action);
+
+    // ASSERT:
+    expect(state.favourites).toContain(expectedId);
+  });
+
+  test("It should not favourite a repository that has already been favourited", () => {
+    // ARRANGE:
+    const expected = [1];
+
+    const action: TrendingRepositoriesAction = {
+      type: "FAVOURITE",
+      payload: {
+        repositoryId: 1,
+      },
+    };
+
+    const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
+      favourites: [1],
+    };
+
+    // ACT:
+    const state = TrendingRepositoriesReducer(initial, action);
+
+    // ASSERT:
+    expect(state.favourites).toEqual(expected);
   });
 });

@@ -1,8 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { useTrendingRepositories } from "../state/TrendingRepositories/hooks/useTrendingRepositories";
+import { useCallback, useMemo } from "react";
 
 export interface RepositoryInfoCardProps {
+  id: number;
   name: string;
   githubLink: string;
   description: string;
@@ -68,11 +71,23 @@ const FooterItem = styled.div`
 `;
 
 export const RepositoryInfoCard = ({
+  id,
   name,
   githubLink,
   numberOfStars,
   description,
 }: RepositoryInfoCardProps) => {
+  const { favouriteRepository, checkIsFavourited } = useTrendingRepositories();
+
+  const onFavourited = useCallback(() => {
+    favouriteRepository(id);
+  }, [favouriteRepository, id]);
+
+  const isFavourited = useMemo(
+    () => checkIsFavourited(id),
+    [checkIsFavourited, id]
+  );
+
   return (
     <Border aria-label="Repository information">
       <Header>
@@ -93,6 +108,11 @@ export const RepositoryInfoCard = ({
         <FooterItem>
           {numberOfStars}
           <p>Stars</p>
+        </FooterItem>
+        <FooterItem>
+          <button onClick={onFavourited} aria-label="Favourite repository">
+            {isFavourited ? "Favourited" : "Favourite"}
+          </button>
         </FooterItem>
       </Footer>
     </Border>

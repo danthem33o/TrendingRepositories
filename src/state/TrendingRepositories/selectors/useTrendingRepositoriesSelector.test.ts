@@ -2,6 +2,7 @@ import { renderHook } from "@testing-library/react";
 import { useTrendingRepositoriesSelector } from "./useTrendingRepositoriesSelector";
 import { Repository } from "../types";
 import * as StateProvider from "../../context/StateProvider";
+import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
 
 describe("useTrendingRepositoriesSelector", () => {
   test("Returns trending repositories", () => {
@@ -27,6 +28,7 @@ describe("useTrendingRepositoriesSelector", () => {
 
     jest.spyOn(StateProvider, "useStateContext").mockReturnValue({
       state: {
+        ...trendingRepositoriesInitialState,
         trending: expected,
       },
       dispatch: jest.fn(),

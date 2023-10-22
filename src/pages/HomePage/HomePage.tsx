@@ -28,6 +28,7 @@ export const HomePage = () => {
         {trending.map((s) => (
           <RepositoryInfoCard
             key={s.id}
+            id={s.id}
             name={s.name}
             githubLink={s.url}
             numberOfStars={s.stars}

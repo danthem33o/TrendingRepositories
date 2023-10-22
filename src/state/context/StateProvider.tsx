@@ -11,6 +11,7 @@ import {
   TrendingRepositoriesState,
 } from "../TrendingRepositories/TrendingRepositoriesState";
 import { TrendingRepositoriesReducer } from "../TrendingRepositories/TrendingRepositoriesReducer";
+import { trendingRepositoriesInitialState } from "../TrendingRepositories/trendingRepositoriesInitialState";
 
 const StateContext = createContext<
   | {
@@ -20,10 +21,18 @@ const StateContext = createContext<
   | undefined
 >(undefined);
 
-export const StateProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(TrendingRepositoriesReducer, {
-    trending: [],
-  });
+export interface StateProviderProps {
+  initialState?: TrendingRepositoriesState;
+}
+
+export const StateProvider = ({
+  children,
+  initialState,
+}: PropsWithChildren<StateProviderProps>) => {
+  const [state, dispatch] = useReducer(
+    TrendingRepositoriesReducer,
+    initialState ?? trendingRepositoriesInitialState
+  );
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
