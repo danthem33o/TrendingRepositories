@@ -11,7 +11,7 @@ describe("Api", () => {
       );
 
     // ACT:
-    const response = await Api.get("/test/url");
+    const response = await new Api().get("/test/url");
 
     // ASSERT:
     expect(response.data).toEqual({ hello: "world" });

@@ -29,6 +29,9 @@ describe("StateProvider", () => {
           description: "1",
           stars: 1,
           createdAt: "1",
+          owner: {
+            name: "Owner",
+          },
         },
       ],
       favourites: [],

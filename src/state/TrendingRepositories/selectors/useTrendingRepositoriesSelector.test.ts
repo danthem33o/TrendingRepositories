@@ -15,6 +15,9 @@ describe("useTrendingRepositoriesSelector", () => {
         description: "1",
         stars: 1,
         createdAt: "1",
+        owner: {
+          name: "Owner 1",
+        },
       },
       {
         id: 2,
@@ -23,6 +26,9 @@ describe("useTrendingRepositoriesSelector", () => {
         description: "2",
         stars: 2,
         createdAt: "2",
+        owner: {
+          name: "Owner 2",
+        },
       },
     ];
 

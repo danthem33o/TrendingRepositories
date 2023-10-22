@@ -14,6 +14,9 @@ const responseToStateRepository = (
     description: response.description,
     stars: response.stargazers_count,
     createdAt: response.created_at,
+    owner: {
+      name: response.owner.login,
+    },
   };
 };
 

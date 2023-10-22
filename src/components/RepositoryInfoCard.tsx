@@ -7,6 +7,7 @@ import { useCallback, useMemo } from "react";
 export interface RepositoryInfoCardProps {
   id: number;
   name: string;
+  ownerName: string;
   githubLink: string;
   description: string;
   numberOfStars: number;
@@ -73,15 +74,19 @@ const FooterItem = styled.div`
 export const RepositoryInfoCard = ({
   id,
   name,
+  ownerName,
   githubLink,
   numberOfStars,
   description,
 }: RepositoryInfoCardProps) => {
-  const { favouriteRepository, checkIsFavourited } = useTrendingRepositories();
+  const { useFavouriteRepository, checkIsFavourited } =
+    useTrendingRepositories();
+
+  const query = useFavouriteRepository(id);
 
   const onFavourited = useCallback(() => {
-    favouriteRepository(id);
-  }, [favouriteRepository, id]);
+    query.mutate({ ownerName, repoName: name });
+  }, [query, ownerName, name]);
 
   const isFavourited = useMemo(
     () => checkIsFavourited(id),
@@ -110,7 +115,11 @@ export const RepositoryInfoCard = ({
           <p>Stars</p>
         </FooterItem>
         <FooterItem>
-          <button onClick={onFavourited} aria-label="Favourite repository">
+          <button
+            onClick={onFavourited}
+            aria-label="Favourite repository"
+            disabled={query.isPending}
+          >
             {isFavourited ? "Favourited" : "Favourite"}
           </button>
         </FooterItem>

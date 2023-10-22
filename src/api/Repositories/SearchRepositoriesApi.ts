@@ -1,4 +1,4 @@
-import { Api } from "../Api";
+import { ApiClient } from "../types";
 import { QueryString } from "../utils/QueryString";
 import { Qualifiers } from "./Qualifiers";
 import {
@@ -10,7 +10,7 @@ import {
 const SEVEN_DAYS = 7;
 
 export class SearchRepositoriesApi {
-  public constructor() {
+  public constructor(private api: ApiClient) {
     this.baseUrl = "https://api.github.com/search/repositories";
   }
 
@@ -37,7 +37,7 @@ export class SearchRepositoriesApi {
       { qualifiers: "q", perPage: "per_page" }
     );
 
-    return Api.get<SearchRepositoriesResponse>(
+    return this.api.get<SearchRepositoriesResponse>(
       encodeURI(this.baseUrl + `${qs}`)
     );
   }

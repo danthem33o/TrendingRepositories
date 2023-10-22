@@ -1,10 +1,15 @@
 import axios from "axios";
-import { ApiResponse } from "./types";
+import { ApiClient, ApiResponse } from "./types";
 
-export class Api {
-  public static async get<TData>(
-    endpoint: string
-  ): Promise<ApiResponse<TData>> {
-    return await axios.get<TData>(endpoint);
+export class Api implements ApiClient {
+  public async get<TData>(url: string): Promise<ApiResponse<TData>> {
+    return await axios.get<TData>(url);
+  }
+
+  public async put<TRequest, TResponse>(
+    url: string,
+    request: TRequest
+  ): Promise<TResponse> {
+    return await axios.post<TRequest, TResponse>(url, request);
   }
 }

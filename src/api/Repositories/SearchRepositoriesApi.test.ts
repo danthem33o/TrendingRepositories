@@ -1,5 +1,10 @@
 import { SearchRepositoriesApi } from "./SearchRepositoriesApi";
-import { Api } from "../Api";
+import { ApiClient } from "../types";
+
+const ApiMock: ApiClient = {
+  get: jest.fn(),
+  put: jest.fn(),
+};
 
 describe("SearchRepositoriesApi", () => {
   test("'get' will use default parameters if none are passed", () => {
@@ -7,8 +12,7 @@ describe("SearchRepositoriesApi", () => {
     const mockedDate = new Date("2023-01-01");
     jest.useFakeTimers().setSystemTime(mockedDate);
 
-    const apiSpy = jest.spyOn(Api, "get");
-    const api = new SearchRepositoriesApi();
+    const api = new SearchRepositoriesApi(ApiMock);
 
     const expectedDate = "2023-01-01T00:00:00.000Z";
     const expectedPage = 1;
@@ -18,8 +22,8 @@ describe("SearchRepositoriesApi", () => {
     api.get();
 
     // ASSERT:
-    expect(apiSpy).toBeCalledTimes(1);
-    expect(apiSpy).toBeCalledWith(
+    expect(ApiMock.get).toBeCalledTimes(1);
+    expect(ApiMock.get).toBeCalledWith(
       encodeURI(
         `https://api.github.com/search/repositories?q=created:<${expectedDate}&page=${expectedPage}&per_page=${expectedPageSize}`
       )
@@ -31,8 +35,7 @@ describe("SearchRepositoriesApi", () => {
     const mockedDate = new Date("2023-01-01");
     jest.useFakeTimers().setSystemTime(mockedDate);
 
-    const apiSpy = jest.spyOn(Api, "get");
-    const api = new SearchRepositoriesApi();
+    const api = new SearchRepositoriesApi(ApiMock);
 
     const expectedDate = "2011-01-01";
     const expectedSort = "forks";
@@ -50,8 +53,8 @@ describe("SearchRepositoriesApi", () => {
     });
 
     // ASSERT:
-    expect(apiSpy).toBeCalledTimes(1);
-    expect(apiSpy).toBeCalledWith(
+    expect(ApiMock.get).toBeCalledTimes(1);
+    expect(ApiMock.get).toBeCalledWith(
       encodeURI(
         `https://api.github.com/search/repositories?q=created:>${expectedDate}&page=${expectedPage}&per_page=${expectedPageSize}&sort=${expectedSort}&order=${expectedOrder}`
       )
@@ -63,8 +66,7 @@ describe("SearchRepositoriesApi", () => {
     const mockedDate = new Date("2023-01-08");
     jest.useFakeTimers().setSystemTime(mockedDate);
 
-    const apiSpy = jest.spyOn(Api, "get");
-    const api = new SearchRepositoriesApi();
+    const api = new SearchRepositoriesApi(ApiMock);
 
     const expectedDate = "2023-01-01T00:00:00.000Z";
     const expectedSort = "stars";
@@ -74,8 +76,8 @@ describe("SearchRepositoriesApi", () => {
     api.getTrendingRepositories();
 
     // ASSERT:
-    expect(apiSpy).toBeCalledTimes(1);
-    expect(apiSpy).toBeCalledWith(
+    expect(ApiMock.get).toBeCalledTimes(1);
+    expect(ApiMock.get).toBeCalledWith(
       encodeURI(
         `https://api.github.com/search/repositories?q=created:>${expectedDate}&page=1&per_page=10&sort=${expectedSort}&order=${expectedOrder}`
       )

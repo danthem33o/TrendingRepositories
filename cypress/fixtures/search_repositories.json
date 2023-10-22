@@ -8,7 +8,10 @@
       "html_url": "https://example.com/repository1",
       "description": "This is the repository for one",
       "stargazers_count": 3643,
-      "created_at": "2023-10-17T04:48:46Z"
+      "created_at": "2023-10-17T04:48:46Z",
+      "owner": {
+        "login": "Owner 1"
+      }
     },
     {
       "id": 2,
@@ -16,7 +19,10 @@
       "html_url": "https://example.com/repository2",
       "description": "This is the repository for two",
       "stargazers_count": 897,
-      "created_at": "2023-10-15T12:08:17Z"
+      "created_at": "2023-10-15T12:08:17Z",
+      "owner": {
+        "login": "Owner 2"
+      }
     },
     {
       "id": 3,
@@ -24,7 +30,10 @@
       "html_url": "https://example.com/repository3",
       "description": "This is the repository for three",
       "stargazers_count": 90,
-      "created_at": "2023-10-17T06:49:59Z"
+      "created_at": "2023-10-17T06:49:59Z",
+      "owner": {
+        "login": "Owner 3"
+      }
     },
     {
       "id": 4,
@@ -32,7 +41,10 @@
       "html_url": "https://example.com/repository4",
       "description": "This is the repository for four",
       "stargazers_count": 3224,
-      "created_at": "2023-10-19T05:06:50Z"
+      "created_at": "2023-10-19T05:06:50Z",
+      "owner": {
+        "login": "Owner 4"
+      }
     },
     {
       "id": 5,
@@ -40,7 +52,10 @@
       "html_url": "https://example.com/repository5",
       "description": "This is the repository for five",
       "stargazers_count": 3224,
-      "created_at": "2023-10-16T08:11:21Z"
+      "created_at": "2023-10-16T08:11:21Z",
+      "owner": {
+        "login": "Owner 5"
+      }
     },
     {
       "id": 6,
@@ -48,7 +63,10 @@
       "html_url": "https://example.com/repository6",
       "description": "",
       "stargazers_count": 23,
-      "created_at": "2023-10-17T08:15:00Z"
+      "created_at": "2023-10-17T08:15:00Z",
+      "owner": {
+        "login": "Owner 6"
+      }
     },
     {
       "id": 7,
@@ -56,7 +74,10 @@
       "html_url": "https://example.com/repository7",
       "description": "This is the repository for seven",
       "stargazers_count": 0,
-      "created_at": "2023-10-15T15:54:45Z"
+      "created_at": "2023-10-15T15:54:45Z",
+      "owner": {
+        "login": "Owner 7"
+      }
     },
     {
       "id": 8,
@@ -64,7 +85,10 @@
       "html_url": "https://example.com/repository8",
       "description": "This is the repository for eight",
       "stargazers_count": 234,
-      "created_at": "2023-10-15T12:58:22Z"
+      "created_at": "2023-10-15T12:58:22Z",
+      "owner": {
+        "login": "Owner 8"
+      }
     },
     {
       "id": 9,
@@ -72,7 +96,10 @@
       "html_url": "https://example.com/repository9",
       "description": "This is the repository for nine",
       "stargazers_count": 0,
-      "created_at": "2023-10-16T03:39:26Z"
+      "created_at": "2023-10-16T03:39:26Z",
+      "owner": {
+        "login": "Owner 9"
+      }
     },
     {
       "id": 10,
@@ -80,7 +107,10 @@
       "html_url": "https://example.com/repository10",
       "description": "This is the repository for ten",
       "stargazers_count": 436,
-      "created_at": "2023-10-16T03:39:26Z"
+      "created_at": "2023-10-16T03:39:26Z",
+      "owner": {
+        "login": "Owner 10"
+      }
     },
     {
       "id": 11,
@@ -88,7 +118,10 @@
       "html_url": "https://example.com/repository11",
       "description": "This is the repository for eleven",
       "stargazers_count": 34,
-      "created_at": "2023-10-15T03:46:21Z"
+      "created_at": "2023-10-15T03:46:21Z",
+      "owner": {
+        "login": "Owner 11"
+      }
     },
     {
       "id": 12,
@@ -96,7 +129,10 @@
       "html_url": "https://example.com/repository12",
       "description": "This is the repository for twelve",
       "stargazers_count": 0,
-      "created_at": "2023-10-15T12:14:18Z"
+      "created_at": "2023-10-15T12:14:18Z",
+      "owner": {
+        "login": "Owner 12"
+      }
     }
   ]
 }

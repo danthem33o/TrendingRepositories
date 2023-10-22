@@ -14,6 +14,10 @@ describe("RepositoryInfoCard", () => {
       __esModule: true,
       ...actual,
       checkIsFavourited: () => false,
+      useFavouriteRepository: () => ({
+        mutate: jest.fn(),
+        isPending: false,
+      }),
     });
 
     render(
@@ -21,6 +25,7 @@ describe("RepositoryInfoCard", () => {
         <RepositoryInfoCard
           id={1}
           name="1"
+          ownerName="Owner"
           githubLink="-"
           numberOfStars={1}
           description="1"
@@ -44,6 +49,10 @@ describe("RepositoryInfoCard", () => {
       __esModule: true,
       ...actual,
       checkIsFavourited: () => true,
+      useFavouriteRepository: () => ({
+        mutate: jest.fn(),
+        isPending: false,
+      }),
     });
 
     render(
@@ -51,6 +60,7 @@ describe("RepositoryInfoCard", () => {
         <RepositoryInfoCard
           id={1}
           name="1"
+          ownerName="Owner"
           githubLink="-"
           numberOfStars={1}
           description="1"
@@ -76,7 +86,10 @@ describe("RepositoryInfoCard", () => {
       __esModule: true,
       ...actual,
       checkIsFavourited: jest.fn(),
-      favouriteRepository: favouriteRepositoryMock,
+      useFavouriteRepository: () => ({
+        mutate: favouriteRepositoryMock,
+        isPending: false,
+      }),
     });
 
     render(
@@ -84,6 +97,7 @@ describe("RepositoryInfoCard", () => {
         <RepositoryInfoCard
           id={1}
           name="1"
+          ownerName="Owner"
           githubLink="-"
           numberOfStars={1}
           description="1"
@@ -98,6 +112,9 @@ describe("RepositoryInfoCard", () => {
 
     // ASSERT:
     expect(favouriteRepositoryMock).toBeCalledTimes(1);
-    expect(favouriteRepositoryMock).toBeCalledWith(1);
+    expect(favouriteRepositoryMock).toBeCalledWith({
+      ownerName: "Owner",
+      repoName: "1",
+    });
   });
 });

@@ -1,16 +1,15 @@
-import { useCallback } from "react";
 import { useStateContext } from "../../context/StateProvider";
+import { useStarRepositoryMutation } from "../../../queries/useStarRepositoryMutation";
 
-export const useFavouriteRepository = () => {
+export const useFavouriteRepository = (repositoryId: number) => {
   const { dispatch } = useStateContext();
 
-  return useCallback(
-    (repositoryId: number) => {
-      dispatch({
-        type: "FAVOURITE",
-        payload: { repositoryId },
-      });
-    },
-    [dispatch]
-  );
+  const mutation = useStarRepositoryMutation(() => {
+    dispatch({
+      type: "FAVOURITE",
+      payload: { repositoryId },
+    });
+  });
+
+  return mutation;
 };

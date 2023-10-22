@@ -5,10 +5,9 @@ import { useTrendingRepositoriesSelector } from "../selectors/useTrendingReposit
 
 export const useTrendingRepositories = () => {
   const initialise = useInitialise();
-  const favouriteRepository = useFavouriteRepository();
 
   const trending = useTrendingRepositoriesSelector();
   const checkIsFavourited = useIsRepositoryFavouritedSelector();
 
-  return { initialise, favouriteRepository, trending, checkIsFavourited };
+  return { initialise, useFavouriteRepository, trending, checkIsFavourited };
 };
