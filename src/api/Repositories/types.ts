@@ -49,3 +49,9 @@ export interface Pagination {
   page: number;
   perPage: number;
 }
+
+export interface SearchRepositoryConfig {
+  pagination?: Pagination;
+  languages?: string[];
+  repos?: { owner: string; repo: string }[];
+}

@@ -3,6 +3,7 @@ import * as StateProvider from "../../context/StateProvider";
 import * as Mutation from "../../../queries/useUnstarRepositoryMutation";
 import { useUnfavouriteRepository } from "./useUnfavouriteRepository";
 import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
+import { Repository } from "../types";
 
 jest.mock("../../../queries/useUnstarRepositoryMutation");
 
@@ -21,7 +22,17 @@ describe("useUnfavouriteRepository", () => {
 
     const mutationSpy = jest.spyOn(Mutation, "useUnstarRepositoryMutation");
 
-    const expected = 1;
+    const expected: Repository = {
+      id: 1,
+      name: "1",
+      url: "1",
+      description: "1",
+      stars: 0,
+      createdAt: "-",
+      owner: {
+        name: "-",
+      },
+    };
 
     // ACT:
     renderHook(() => useUnfavouriteRepository(expected));
@@ -36,7 +47,7 @@ describe("useUnfavouriteRepository", () => {
       expect(mutationSpy).toBeCalledWith(
         mockDispatch({
           type: "FAVOURITE",
-          payload: { repositoryId: expected },
+          payload: { repository: expected },
         })
       );
     });

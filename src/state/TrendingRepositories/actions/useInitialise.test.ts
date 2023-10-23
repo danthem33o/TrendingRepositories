@@ -30,7 +30,7 @@ describe("useInitialise", () => {
     ];
 
     // ACT:
-    renderHook(() => useInitialise()(expected, [1]));
+    renderHook(() => useInitialise()(expected, []));
 
     // ASSERT:
     expect(mockDispatch).toBeCalledTimes(1);
@@ -39,7 +39,7 @@ describe("useInitialise", () => {
       payload: {
         ...trendingRepositoriesInitialState,
         trending: expected,
-        favourites: [1],
+        favourites: [],
       },
     });
   });

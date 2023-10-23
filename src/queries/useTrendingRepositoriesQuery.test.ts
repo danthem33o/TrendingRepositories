@@ -1,12 +1,11 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren, createElement } from "react";
 import { renderHook } from "@testing-library/react";
-import * as ReactQuery from "@tanstack/react-query";
 import { useTrendingRepositoriesQuery } from "./useTrendingRepositoriesQuery";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SearchRepositoriesApi } from "../api/Repositories/SearchRepositoriesApi";
 
 const wrapper = (props: PropsWithChildren) =>
-  React.createElement(ReactQuery.QueryClientProvider, {
+  createElement(QueryClientProvider, {
     children: props.children,
     client: new QueryClient(),
   });

@@ -5,6 +5,7 @@ import { Repository as ApiRepository } from "../../../api/Repositories/types";
 import { Repository as StateRepository } from "../../../state/TrendingRepositories/types";
 import { useFavouritedRepositoriesQuery } from "../../../queries/useFavouritedRepositoriesQuery";
 import { StarredRepository } from "../../../api/Stars/types";
+import { useSearchRepositoriesQuery } from "../../../queries/useSearchRepositoriesQuery";
 
 const responseToStateRepository = (
   response: ApiRepository
@@ -22,21 +23,23 @@ const responseToStateRepository = (
   };
 };
 
-const responseToFavourited =
-  (repositories: ApiRepository[]) =>
-  (favourited: StarredRepository): number => {
-    return (
-      repositories.find(
-        (s) =>
-          s.owner.login === favourited.ownerName &&
-          s.name === favourited.repoName
-      )?.id ?? 0
-    );
+const starredToQuery = (
+  favourited: StarredRepository
+): { owner: string; repo: string } => {
+  return {
+    owner: favourited.ownerName,
+    repo: favourited.repoName,
   };
+};
 
 export const useSetup = () => {
   const repositoriesQuery = useTrendingRepositoriesQuery();
   const favouritedQuery = useFavouritedRepositoriesQuery();
+  const favouritedRepositoriesQuery = useSearchRepositoriesQuery(
+    "search-favourited-repositories",
+    { repos: favouritedQuery.data?.data.map(starredToQuery) },
+    !favouritedQuery.isLoading && favouritedQuery.isSuccess
+  );
 
   const { initialise } = useTrendingRepositories();
 
@@ -44,22 +47,23 @@ export const useSetup = () => {
     if (
       !repositoriesQuery.isLoading &&
       repositoriesQuery.isSuccess &&
-      !favouritedQuery.isLoading &&
-      favouritedQuery.isSuccess
+      !favouritedRepositoriesQuery.isLoading &&
+      favouritedRepositoriesQuery.isSuccess
     ) {
-      const mapFavourites = responseToFavourited(
-        repositoriesQuery.data?.data.items ?? []
-      );
-
       initialise(
         repositoriesQuery.data?.data.items.map(responseToStateRepository) ?? [],
-        favouritedQuery.data?.data.map(mapFavourites) ?? []
+        favouritedRepositoriesQuery.data?.data.items.map(
+          responseToStateRepository
+        ) ?? []
       );
     }
   }, [
     favouritedQuery.data?.data,
     favouritedQuery.isLoading,
     favouritedQuery.isSuccess,
+    favouritedRepositoriesQuery.data?.data.items,
+    favouritedRepositoriesQuery.isLoading,
+    favouritedRepositoriesQuery.isSuccess,
     initialise,
     repositoriesQuery.data,
     repositoriesQuery.isLoading,

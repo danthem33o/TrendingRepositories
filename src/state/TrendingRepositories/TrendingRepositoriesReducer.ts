@@ -12,14 +12,14 @@ export const TrendingRepositoriesReducer = (
       return action.payload;
     }
     case "FAVOURITE": {
-      const { repositoryId } = action.payload;
+      const { repository } = action.payload;
 
-      if (~state.favourites.indexOf(repositoryId)) {
+      if (~state.favourites.findIndex((s) => s.id === repository.id)) {
         return state;
       }
 
       const favourites = Array.from(state.favourites);
-      favourites.push(action.payload.repositoryId);
+      favourites.push(action.payload.repository);
 
       return {
         ...state,
@@ -27,9 +27,9 @@ export const TrendingRepositoriesReducer = (
       };
     }
     case "UNFAVOURITE": {
-      const { repositoryId } = action.payload;
+      const { repository } = action.payload;
 
-      const index = state.favourites.indexOf(repositoryId);
+      const index = state.favourites.findIndex((s) => s.id === repository.id);
 
       if (!~index) {
         return state;

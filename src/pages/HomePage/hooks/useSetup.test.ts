@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import * as TrendingQuery from "../../../queries/useTrendingRepositoriesQuery";
 import * as FavouritesQuery from "../../../queries/useFavouritedRepositoriesQuery";
+import * as SearchQuery from "../../../queries/useSearchRepositoriesQuery";
 import * as State from "../../../state/TrendingRepositories/hooks/useTrendingRepositories";
 import { useSetup } from "./useSetup";
 
@@ -12,15 +13,6 @@ describe("useSetup", () => {
     const useTrendingRepositoriesQueryRest = jest.requireActual(
       "../../../queries/useTrendingRepositoriesQuery"
     );
-
-    const useFavouritedRepositoriesQueryRest = jest.requireActual(
-      "../../../queries/useFavouritedRepositoriesQuery"
-    );
-
-    const useTrendingRepositoriesRest = jest.requireActual(
-      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
-    );
-
     jest.spyOn(TrendingQuery, "useTrendingRepositoriesQuery").mockReturnValue({
       __esModule: true,
       ...useTrendingRepositoriesQueryRest,
@@ -28,6 +20,9 @@ describe("useSetup", () => {
       isLoading: true,
     });
 
+    const useFavouritedRepositoriesQueryRest = jest.requireActual(
+      "../../../queries/useFavouritedRepositoriesQuery"
+    );
     jest
       .spyOn(FavouritesQuery, "useFavouritedRepositoriesQuery")
       .mockReturnValueOnce({
@@ -40,10 +35,22 @@ describe("useSetup", () => {
         },
       });
 
+    const useTrendingRepositoriesRest = jest.requireActual(
+      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
+    );
     jest.spyOn(State, "useTrendingRepositories").mockReturnValue({
       __esModule: true,
       ...useTrendingRepositoriesRest,
       initialise: initialiseMock,
+    });
+
+    const useSearchRepositoriesQueryRest = jest.requireActual(
+      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
+    );
+    jest.spyOn(SearchQuery, "useSearchRepositoriesQuery").mockReturnValue({
+      __esModule: true,
+      ...useSearchRepositoriesQueryRest,
+      initialise: jest.fn(),
     });
 
     // ACT:
@@ -60,15 +67,6 @@ describe("useSetup", () => {
     const useTrendingRepositoriesQueryRest = jest.requireActual(
       "../../../queries/useTrendingRepositoriesQuery"
     );
-
-    const useFavouritedRepositoriesQueryRest = jest.requireActual(
-      "../../../queries/useFavouritedRepositoriesQuery"
-    );
-
-    const useTrendingRepositoriesRest = jest.requireActual(
-      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
-    );
-
     jest.spyOn(TrendingQuery, "useTrendingRepositoriesQuery").mockReturnValue({
       __esModule: true,
       ...useTrendingRepositoriesQueryRest,
@@ -81,6 +79,9 @@ describe("useSetup", () => {
       },
     });
 
+    const useFavouritedRepositoriesQueryRest = jest.requireActual(
+      "../../../queries/useFavouritedRepositoriesQuery"
+    );
     jest
       .spyOn(FavouritesQuery, "useFavouritedRepositoriesQuery")
       .mockReturnValueOnce({
@@ -93,10 +94,29 @@ describe("useSetup", () => {
         },
       });
 
+    const useTrendingRepositoriesRest = jest.requireActual(
+      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
+    );
     jest.spyOn(State, "useTrendingRepositories").mockReturnValue({
       __esModule: true,
       ...useTrendingRepositoriesRest,
       initialise: initialiseMock,
+    });
+
+    const useSearchRepositoriesQueryRest = jest.requireActual(
+      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
+    );
+    jest.spyOn(SearchQuery, "useSearchRepositoriesQuery").mockReturnValue({
+      __esModule: true,
+      ...useSearchRepositoriesQueryRest,
+      initialise: jest.fn(),
+      isSuccess: true,
+      isLoading: false,
+      data: {
+        data: {
+          items: [],
+        },
+      },
     });
 
     // ACT:

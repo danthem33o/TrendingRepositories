@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { StateProvider } from "../state/context/StateProvider";
 import { RepositoryInfoCard } from "./RepositoryInfoCard";
 import * as Hooks from "../state/TrendingRepositories/hooks/useTrendingRepositories";
+import { Repository } from "../state/TrendingRepositories/types";
 
 describe("RepositoryInfoCard", () => {
   test('Button should show "Favourite" if it has not yet been favourited', () => {
@@ -24,16 +25,21 @@ describe("RepositoryInfoCard", () => {
       }),
     });
 
+    const repository: Repository = {
+      id: 1,
+      name: "1",
+      url: "-",
+      description: "1",
+      stars: 1,
+      createdAt: "",
+      owner: {
+        name: "Owner",
+      },
+    };
+
     render(
       <StateProvider>
-        <RepositoryInfoCard
-          id={1}
-          name="1"
-          ownerName="Owner"
-          githubLink="-"
-          numberOfStars={1}
-          description="1"
-        />
+        <RepositoryInfoCard repository={repository} />
       </StateProvider>
     );
 
@@ -61,16 +67,21 @@ describe("RepositoryInfoCard", () => {
       }),
     });
 
+    const repository: Repository = {
+      id: 1,
+      name: "1",
+      url: "-",
+      description: "1",
+      stars: 1,
+      createdAt: "",
+      owner: {
+        name: "Owner",
+      },
+    };
+
     render(
       <StateProvider>
-        <RepositoryInfoCard
-          id={1}
-          name="1"
-          ownerName="Owner"
-          githubLink="-"
-          numberOfStars={1}
-          description="1"
-        />
+        <RepositoryInfoCard repository={repository} />
       </StateProvider>
     );
 
@@ -100,16 +111,21 @@ describe("RepositoryInfoCard", () => {
       }),
     });
 
+    const repository: Repository = {
+      id: 1,
+      name: "1",
+      url: "-",
+      description: "1",
+      stars: 1,
+      createdAt: "",
+      owner: {
+        name: "Owner",
+      },
+    };
+
     render(
       <StateProvider>
-        <RepositoryInfoCard
-          id={1}
-          name="1"
-          ownerName="Owner"
-          githubLink="-"
-          numberOfStars={1}
-          description="1"
-        />
+        <RepositoryInfoCard repository={repository} />
       </StateProvider>
     );
 
@@ -148,16 +164,21 @@ describe("RepositoryInfoCard", () => {
       }),
     });
 
+    const repository: Repository = {
+      id: 1,
+      name: "1",
+      url: "-",
+      description: "1",
+      stars: 1,
+      createdAt: "",
+      owner: {
+        name: "Owner",
+      },
+    };
+
     render(
       <StateProvider>
-        <RepositoryInfoCard
-          id={1}
-          name="1"
-          ownerName="Owner"
-          githubLink="-"
-          numberOfStars={1}
-          description="1"
-        />
+        <RepositoryInfoCard repository={repository} />
       </StateProvider>
     );
 

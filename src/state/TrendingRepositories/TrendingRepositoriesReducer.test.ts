@@ -4,6 +4,7 @@ import {
   TrendingRepositoriesAction,
   TrendingRepositoriesState,
 } from "./TrendingRepositoriesState";
+import { Repository } from "./types";
 
 describe("TrendingRepositoriesReducer", () => {
   test("It can initialise the trending repositories", () => {
@@ -44,12 +45,22 @@ describe("TrendingRepositoriesReducer", () => {
 
   test("It can favourite a repository", () => {
     // ARRANGE:
-    const expectedId = 1;
+    const expected: Repository = {
+      id: 1,
+      name: "1",
+      url: "1",
+      description: "1",
+      stars: 0,
+      createdAt: "-",
+      owner: {
+        name: "-",
+      },
+    };
 
     const action: TrendingRepositoriesAction = {
       type: "FAVOURITE",
       payload: {
-        repositoryId: expectedId,
+        repository: expected,
       },
     };
 
@@ -62,53 +73,75 @@ describe("TrendingRepositoriesReducer", () => {
     const state = TrendingRepositoriesReducer(initial, action);
 
     // ASSERT:
-    expect(state.favourites).toContain(expectedId);
+    expect(
+      state.favourites.find((s) => s.id === expected.id)
+    ).not.toBeUndefined();
   });
 
   test("It should not favourite a repository that has already been favourited", () => {
     // ARRANGE:
-    const expected = [1];
+    const expected: Repository = {
+      id: 1,
+      name: "1",
+      url: "1",
+      description: "1",
+      stars: 0,
+      createdAt: "-",
+      owner: {
+        name: "-",
+      },
+    };
 
     const action: TrendingRepositoriesAction = {
       type: "FAVOURITE",
       payload: {
-        repositoryId: 1,
+        repository: expected,
       },
     };
 
     const initial: TrendingRepositoriesState = {
       ...trendingRepositoriesInitialState,
-      favourites: [1],
+      favourites: [expected],
     };
 
     // ACT:
     const state = TrendingRepositoriesReducer(initial, action);
 
     // ASSERT:
-    expect(state.favourites).toEqual(expected);
+    expect(state.favourites).toEqual([expected]);
   });
 
   test("It unfavourites a repository", () => {
     // ARRANGE:
-    const expectedId = 1;
+    const expected: Repository = {
+      id: 1,
+      name: "1",
+      url: "1",
+      description: "1",
+      stars: 0,
+      createdAt: "-",
+      owner: {
+        name: "-",
+      },
+    };
 
     const action: TrendingRepositoriesAction = {
       type: "UNFAVOURITE",
       payload: {
-        repositoryId: expectedId,
+        repository: expected,
       },
     };
 
     const initial: TrendingRepositoriesState = {
       ...trendingRepositoriesInitialState,
-      favourites: [expectedId],
+      favourites: [expected],
     };
 
     // ACT:
     const state = TrendingRepositoriesReducer(initial, action);
 
     // ASSERT:
-    expect(state.favourites).not.toContain(expectedId);
+    expect(state.favourites.find((s) => s.id === expected.id)).toBeUndefined();
   });
 
   test("Can filter by languages", () => {

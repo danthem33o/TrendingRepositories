@@ -26,15 +26,7 @@ export const TrendingSection = () => {
           }}
         >
           {trending.map((s) => (
-            <RepositoryInfoCard
-              key={s.id}
-              id={s.id}
-              name={s.name}
-              ownerName={s.owner.name}
-              githubLink={s.url}
-              numberOfStars={s.stars}
-              description={s.description}
-            />
+            <RepositoryInfoCard key={s.id} repository={s} />
           ))}
         </Box>
       )}
