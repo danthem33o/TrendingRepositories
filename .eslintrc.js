@@ -8,6 +8,7 @@ module.exports = {
       jsx: true,
     },
   },
+  ignorePatterns: ['cypress.config.ts'],
   rules: {
     'react/react-in-jsx-scope': 0,
     'react/no-children-prop': 0,
