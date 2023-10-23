@@ -38,7 +38,9 @@ export const useSetup = () => {
   const favouritedRepositoriesQuery = useSearchRepositoriesQuery(
     "search-favourited-repositories",
     { repos: favouritedQuery.data?.data.map(starredToQuery) },
-    !favouritedQuery.isLoading && favouritedQuery.isSuccess
+    !favouritedQuery.isLoading &&
+      favouritedQuery.isSuccess &&
+      !!favouritedQuery.data.data.length
   );
 
   const { initialise } = useTrendingRepositories();
@@ -58,9 +60,6 @@ export const useSetup = () => {
       );
     }
   }, [
-    favouritedQuery.data?.data,
-    favouritedQuery.isLoading,
-    favouritedQuery.isSuccess,
     favouritedRepositoriesQuery.data?.data.items,
     favouritedRepositoriesQuery.isLoading,
     favouritedRepositoriesQuery.isSuccess,
