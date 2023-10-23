@@ -32,8 +32,7 @@ export const HomePageActions = {
         .should("exist");
     },
     favourite: (target: string) => {
-      cy.findAllByRole("heading", { name: "Trending repositories" })
-        .eq(1)
+      cy.findByRole("heading", { name: "Trending repositories (Top 10)" })
         .parent()
         .findByText(target)
         .parent()
@@ -43,8 +42,7 @@ export const HomePageActions = {
         .click();
     },
     unFavourite: (target: string) => {
-      cy.findAllByRole("heading", { name: "Trending repositories" })
-        .eq(1)
+      cy.findByRole("heading", { name: "Trending repositories (Top 10)" })
         .parent()
         .findByText(target)
         .parent()
