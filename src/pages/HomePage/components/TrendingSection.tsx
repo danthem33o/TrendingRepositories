@@ -15,7 +15,7 @@ export const TrendingSection = () => {
       </Typography>
       {isLoading ? (
         <CircularProgress />
-      ) : (
+      ) : trending.length ? (
         <Box
           sx={{
             overflowX: "auto",
@@ -29,6 +29,11 @@ export const TrendingSection = () => {
             <RepositoryInfoCard key={s.id} repository={s} />
           ))}
         </Box>
+      ) : (
+        <div>
+          Cannot get trending repositories at this time. Please refresh and try
+          again shortly.
+        </div>
       )}
     </>
   );
