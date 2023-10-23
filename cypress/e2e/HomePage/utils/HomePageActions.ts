@@ -25,23 +25,26 @@ export const HomePageActions = {
 
       cy.findAllByLabelText("Repository information")
         .eq(target)
-        .findByText("Stars")
-        .parent()
-        .should("contain", noOfStars);
+        .findByTitle(`Starred ${noOfStars} times`)
+        .should("exist");
     },
     favourite: (target: string) => {
-      cy.findByText("Trending repositories")
-        .next()
+      cy.findAllByRole("heading", { name: "Trending repositories" })
+        .eq(1)
+        .parent()
         .findByText(target)
+        .parent()
         .parent()
         .parent()
         .findByRole("button", { name: "Favourite repository" })
         .click();
     },
     unFavourite: (target: string) => {
-      cy.findByText("Trending repositories")
-        .next()
+      cy.findAllByRole("heading", { name: "Trending repositories" })
+        .eq(1)
+        .parent()
         .findByText(target)
+        .parent()
         .parent()
         .parent()
         .findByRole("button", { name: "Favourite repository" })
@@ -51,13 +54,13 @@ export const HomePageActions = {
   favouritedRepositories: {
     doesExist: (target: string) =>
       cy
-        .findByText("Favourited repositories")
-        .next()
+        .contains("Favourited repositories")
+        .parent()
         .findByText(target)
         .should("exist"),
     doesNotExist: (target: string) =>
       cy
-        .findByText("Favourited repositories")
+        .contains("Favourited repositories")
         .next()
         .findByText(target)
         .should("not.exist"),

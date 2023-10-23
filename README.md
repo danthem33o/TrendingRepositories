@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Styles
 
-It uses [styled-components](https://styled-components.com/) for theming and styling. Re-usable components can be found in the `components` folder.
+This project uses [material-ui](https://mui.com/) for its theming and components. Re-usable components can be found in the `components` folder.
 
 ### APIs
 

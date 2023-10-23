@@ -1,56 +1,91 @@
-import styled from "styled-components";
 import { RepositoryInfoCard } from "../../components/RepositoryInfoCard";
 import { Page } from "../../components/Page";
 import { useTrendingRepositories } from "../../state/TrendingRepositories/hooks/useTrendingRepositories";
 import { useSetup } from "./hooks/useSetup";
-
-const ScrollSection = styled.div`
-  display: flex;
-  gap: 30px;
-  width: 100%;
-  height: 250px;
-  overflow-x: auto;
-  padding: 30px 20px;
-`;
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 
 export const HomePage = () => {
   const query = useSetup();
   const { trending, favourites } = useTrendingRepositories();
 
   if (query.isLoading) {
-    return <>...loading</>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div>
+          <CircularProgress />
+        </div>
+        <Typography component="div">
+          Retrieving trending repositories
+        </Typography>
+      </Box>
+    );
   }
 
   return (
     <Page>
-      <h3>Trending repositories</h3>
-      <ScrollSection>
-        {trending.map((s) => (
-          <RepositoryInfoCard
-            key={s.id}
-            id={s.id}
-            name={s.name}
-            ownerName={s.owner.name}
-            githubLink={s.url}
-            numberOfStars={s.stars}
-            description={s.description}
-          />
-        ))}
-      </ScrollSection>
-      <h3>Favourited repositories</h3>
-      <ScrollSection>
-        {favourites.map((s) => (
-          <RepositoryInfoCard
-            key={s.id}
-            id={s.id}
-            name={s.name}
-            ownerName={s.owner.name}
-            githubLink={s.url}
-            numberOfStars={s.stars}
-            description={s.description}
-          />
-        ))}
-      </ScrollSection>
+      <Grid container spacing={8}>
+        <Grid container item spacing={1}>
+          <Typography variant="h5" sx={{ width: "100%" }}>
+            Trending repositories
+          </Typography>
+          <Box
+            sx={{
+              overflowX: "auto",
+              display: "flex",
+              gap: 2,
+              flexDirection: "row",
+              padding: "10px 5px",
+            }}
+          >
+            {trending.map((s) => (
+              <RepositoryInfoCard
+                key={s.id}
+                id={s.id}
+                name={s.name}
+                ownerName={s.owner.name}
+                githubLink={s.url}
+                numberOfStars={s.stars}
+                description={s.description}
+              />
+            ))}
+          </Box>
+        </Grid>
+        <Grid container item spacing={1}>
+          <Typography variant="h5" sx={{ width: "100%" }}>
+            Favourited repositories ({favourites.length})
+          </Typography>
+          <Box
+            sx={{
+              overflowX: "auto",
+              display: "flex",
+              gap: 2,
+              flexDirection: "row",
+              padding: "10px 5px",
+            }}
+          >
+            {favourites.map((s) => (
+              <RepositoryInfoCard
+                key={s.id}
+                id={s.id}
+                name={s.name}
+                ownerName={s.owner.name}
+                githubLink={s.url}
+                numberOfStars={s.stars}
+                description={s.description}
+              />
+            ))}
+          </Box>
+        </Grid>
+      </Grid>
     </Page>
   );
 };

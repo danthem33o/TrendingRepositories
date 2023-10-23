@@ -1,14 +1,12 @@
+import { Container } from "@mui/material";
 import { PropsWithChildren } from "react";
-import styled from "styled-components";
+import { Header } from "./Header";
 
-export interface PageProps {
-  className?: string;
-}
-
-export const Page = styled(
-  ({ className, children }: PropsWithChildren<PageProps>) => {
-    return <div className={className}>{children}</div>;
-  }
-)`
-  padding: 30px 20px;
-`;
+export const Page = ({ children }: PropsWithChildren) => {
+  return (
+    <Container maxWidth="lg">
+      <Header />
+      <main>{children}</main>
+    </Container>
+  );
+};
