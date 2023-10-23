@@ -11,7 +11,7 @@ export const TrendingSection = () => {
   return (
     <>
       <Typography variant="h5" sx={{ width: "100%" }}>
-        Trending repositories
+        Trending repositories (Top 10)
       </Typography>
       {isLoading ? (
         <CircularProgress />
