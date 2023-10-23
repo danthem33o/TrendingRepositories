@@ -17,6 +17,7 @@ export interface Repository {
   description: string;
   stargazers_count: number;
   created_at: string;
+  languages_url: string;
   owner: {
     login: string;
   };

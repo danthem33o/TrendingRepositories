@@ -110,4 +110,62 @@ describe("TrendingRepositoriesReducer", () => {
     // ASSERT:
     expect(state.favourites).not.toContain(expectedId);
   });
+
+  test("Can filter by languages", () => {
+    // ARRANGE:
+    const expected = ["C#", "JavaScript", "TypeScript"];
+
+    const action: TrendingRepositoriesAction = {
+      type: "FILTER_BY_LANGUAGES",
+      payload: {
+        languages: expected,
+      },
+    };
+
+    const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
+      languages: [],
+    };
+
+    // ACT:
+    const state = TrendingRepositoriesReducer(initial, action);
+
+    // ASSERT:
+    expect(state.languages).toEqual(expected);
+  });
+
+  test("Can set trending languages", () => {
+    // ARRANGE:
+    const expected = [
+      {
+        id: 1,
+        name: "1",
+        url: "https://example.com",
+        description: "1",
+        stars: 1,
+        createdAt: "1",
+        owner: {
+          name: "Owner",
+        },
+      },
+    ];
+
+    const action: TrendingRepositoriesAction = {
+      type: "SET_TRENDING",
+      payload: {
+        trending: expected,
+      },
+    };
+
+    const initial: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
+      trending: [],
+    };
+
+    // ACT:
+    const state = TrendingRepositoriesReducer(initial, action);
+
+    // ASSERT:
+    expect(state.trending).toEqual(expected);
+  });
 });

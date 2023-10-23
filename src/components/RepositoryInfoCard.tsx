@@ -109,7 +109,7 @@ export const RepositoryInfoCard = ({
         <IconButton
           onClick={onFavourited}
           aria-label="Favourite repository"
-          title="Favourite"
+          title={isFavourited ? "Favourited" : "Favourite"}
           disabled={favouriteQuery.isPending || unFavouriteQuery.isPending}
         >
           {isFavourited ? <FavoriteIcon /> : <FavoriteBorderIcon />}

@@ -24,4 +24,17 @@ describe("Trending repositories", () => {
       3643
     );
   });
+
+  it("can be filtered by language", () => {
+    cy.log("Testing can enter a langauge to filter by");
+    HomePageActions.filter("JavaScript");
+
+    cy.log("Testing request has been sent");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    cy.get("@searchRepositories").should((req: any) => {
+      expect(req.request.url).equals(
+        "https://api.github.com/search/repositories?q=created:%3E2023-01-01T00:00:00.000Z+language:JavaScript&page=1&per_page=10&sort=stars&order=desc"
+      );
+    });
+  });
 });

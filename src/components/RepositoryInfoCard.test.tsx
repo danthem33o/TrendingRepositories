@@ -38,9 +38,7 @@ describe("RepositoryInfoCard", () => {
     );
 
     // ASSERT:
-    expect(
-      screen.getByRole("button", { name: "Favourite repository" })
-    ).toContainHTML("Favourite");
+    expect(screen.getByTitle("Favourite")).not.toBeUndefined();
   });
 
   test('Button should show "Favourited" if it has been favourited', () => {
@@ -77,9 +75,7 @@ describe("RepositoryInfoCard", () => {
     );
 
     // ASSERT:
-    expect(
-      screen.getByRole("button", { name: "Favourite repository" })
-    ).toContainHTML("Favourited");
+    expect(screen.getByTitle("Favourited")).not.toBeUndefined();
   });
 
   test("A repository can be favourited", () => {

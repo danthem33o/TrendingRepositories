@@ -47,14 +47,18 @@ export class SearchRepositoriesApi {
    * last seven days.
    */
   public getTrendingRepositories(
-    { page, perPage }: Pagination = { page: 1, perPage: 10 }
+    { page, perPage }: Pagination = { page: 1, perPage: 10 },
+    languages: string[] = []
   ) {
     const lastSevenDays = new Date(
       new Date().setDate(new Date().getDate() - SEVEN_DAYS)
     );
 
+    const qualifiers = new Qualifiers().created(lastSevenDays, ">");
+    languages.forEach((s) => qualifiers.language(s));
+
     return this.get({
-      qualifiers: new Qualifiers().created(lastSevenDays, ">").build(),
+      qualifiers: qualifiers.build(),
       sort: "stars",
       order: "desc",
       page,

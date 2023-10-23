@@ -3,6 +3,9 @@ export const HomePageActions = {
     cy.init().visit("/");
     cy.wait("@searchRepositories");
   },
+  filter: (language: string) => {
+    cy.findByLabelText("Select languages").type(language + "{enter}");
+  },
   trendingRepositories: {
     requestParams: (requestAlias: string, query: string) => {
       cy.get(requestAlias)

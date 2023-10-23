@@ -1,13 +1,13 @@
-import { RepositoryInfoCard } from "../../components/RepositoryInfoCard";
 import { Page } from "../../components/Page";
-import { useTrendingRepositories } from "../../state/TrendingRepositories/hooks/useTrendingRepositories";
 import { useSetup } from "./hooks/useSetup";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import { FormControl } from "@mui/base";
+import { LanguageFilter } from "./components/LanguageFilter";
+import { TrendingSection } from "./components/TrendingSection";
+import { FavouritesSection } from "./components/FavouritesSection";
 
 export const HomePage = () => {
   const query = useSetup();
-  const { trending, favourites } = useTrendingRepositories();
-
   if (query.isLoading) {
     return (
       <Box
@@ -33,57 +33,16 @@ export const HomePage = () => {
   return (
     <Page>
       <Grid container spacing={8}>
-        <Grid container item spacing={1}>
-          <Typography variant="h5" sx={{ width: "100%" }}>
-            Trending repositories
-          </Typography>
-          <Box
-            sx={{
-              overflowX: "auto",
-              display: "flex",
-              gap: 2,
-              flexDirection: "row",
-              padding: "10px 5px",
-            }}
-          >
-            {trending.map((s) => (
-              <RepositoryInfoCard
-                key={s.id}
-                id={s.id}
-                name={s.name}
-                ownerName={s.owner.name}
-                githubLink={s.url}
-                numberOfStars={s.stars}
-                description={s.description}
-              />
-            ))}
-          </Box>
+        <Grid item sx={{ width: "100%" }}>
+          <FormControl style={{ width: "100%" }}>
+            <LanguageFilter />
+          </FormControl>
         </Grid>
         <Grid container item spacing={1}>
-          <Typography variant="h5" sx={{ width: "100%" }}>
-            Favourited repositories ({favourites.length})
-          </Typography>
-          <Box
-            sx={{
-              overflowX: "auto",
-              display: "flex",
-              gap: 2,
-              flexDirection: "row",
-              padding: "10px 5px",
-            }}
-          >
-            {favourites.map((s) => (
-              <RepositoryInfoCard
-                key={s.id}
-                id={s.id}
-                name={s.name}
-                ownerName={s.owner.name}
-                githubLink={s.url}
-                numberOfStars={s.stars}
-                description={s.description}
-              />
-            ))}
-          </Box>
+          <TrendingSection />
+        </Grid>
+        <Grid container item spacing={1}>
+          <FavouritesSection />
         </Grid>
       </Grid>
     </Page>

@@ -1,46 +1,29 @@
 import { renderHook } from "@testing-library/react";
 import * as StateProvider from "../../context/StateProvider";
-import { useInitialise } from "./useInitialise";
 import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
+import { useFilterByLanguages } from "./useFilterByLanguages";
 
-describe("useInitialise", () => {
-  test("first action with expected payload", () => {
+describe("useFilterByLanguages", () => {
+  test("It fires the action with the given payload", () => {
     // ARRANGE:
     const mockDispatch = jest.fn();
     jest.spyOn(StateProvider, "useStateContext").mockReturnValue({
       state: {
         ...trendingRepositoriesInitialState,
         trending: [],
+        favourites: [],
       },
       dispatch: mockDispatch,
     });
 
-    const expected = [
-      {
-        id: 1,
-        name: "1",
-        url: "https://example.com",
-        description: "1",
-        stars: 1,
-        createdAt: "1",
-        owner: {
-          name: "Owner",
-        },
-      },
-    ];
-
     // ACT:
-    renderHook(() => useInitialise()(expected, [1]));
+    renderHook(() => useFilterByLanguages()([]));
 
     // ASSERT:
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith({
-      type: "TRENDING_INIT",
-      payload: {
-        ...trendingRepositoriesInitialState,
-        trending: expected,
-        favourites: [1],
-      },
+      type: "FILTER_BY_LANGUAGES",
+      payload: { languages: [] },
     });
   });
 });

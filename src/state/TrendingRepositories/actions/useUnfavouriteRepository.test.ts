@@ -2,6 +2,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import * as StateProvider from "../../context/StateProvider";
 import * as Mutation from "../../../queries/useUnstarRepositoryMutation";
 import { useUnfavouriteRepository } from "./useUnfavouriteRepository";
+import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
 
 jest.mock("../../../queries/useUnstarRepositoryMutation");
 
@@ -11,6 +12,7 @@ describe("useUnfavouriteRepository", () => {
     const mockDispatch = jest.fn();
     jest.spyOn(StateProvider, "useStateContext").mockReturnValue({
       state: {
+        ...trendingRepositoriesInitialState,
         trending: [],
         favourites: [],
       },

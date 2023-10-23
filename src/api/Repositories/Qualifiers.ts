@@ -7,8 +7,21 @@ export class Qualifiers {
 
   private base: string;
 
+  private addQualifier(qualifier: string) {
+    if (this.base) {
+      this.base += "+" + qualifier;
+    } else {
+      this.base += qualifier;
+    }
+  }
+
   public created(date: Date, operator: SearchRepositoriesQualifierOperators) {
-    this.base += `created:${operator}${date.toISOString()}`;
+    this.addQualifier(`created:${operator}${date.toISOString()}`);
+    return this;
+  }
+
+  public language(language: string) {
+    this.addQualifier(`language:${language}`);
     return this;
   }
 

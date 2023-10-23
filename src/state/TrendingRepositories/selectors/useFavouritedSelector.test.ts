@@ -2,6 +2,7 @@ import { renderHook } from "@testing-library/react";
 import * as StateProvider from "../../context/StateProvider";
 import { useFavouritedSelector } from "./useFavouritedSelector";
 import { Repository } from "../types";
+import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
 
 describe("useFavouritedSelector", () => {
   test("Returns favourited repositories", () => {
@@ -22,6 +23,7 @@ describe("useFavouritedSelector", () => {
 
     jest.spyOn(StateProvider, "useStateContext").mockReturnValue({
       state: {
+        ...trendingRepositoriesInitialState,
         trending: [
           ...expected,
           {

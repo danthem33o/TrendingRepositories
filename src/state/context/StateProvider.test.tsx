@@ -2,6 +2,7 @@ import { render, renderHook, screen } from "@testing-library/react";
 import { StateProvider, useStateContext } from "./StateProvider";
 import React from "react";
 import { TrendingRepositoriesState } from "../TrendingRepositories/TrendingRepositoriesState";
+import { trendingRepositoriesInitialState } from "../TrendingRepositories/trendingRepositoriesInitialState";
 
 describe("StateProvider", () => {
   test("The app can be rendered with provider", () => {
@@ -21,6 +22,7 @@ describe("StateProvider", () => {
     const useReducerSpy = jest.spyOn(React, "useReducer");
 
     const state: TrendingRepositoriesState = {
+      ...trendingRepositoriesInitialState,
       trending: [
         {
           id: 1,

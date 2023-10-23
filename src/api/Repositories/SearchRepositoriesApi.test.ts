@@ -84,4 +84,28 @@ describe("SearchRepositoriesApi", () => {
       )
     );
   });
+
+  test("Trending repositories can be filtered by languages", () => {
+    // ARRANGE:
+    const mockedDate = new Date("2023-01-08");
+    jest.useFakeTimers().setSystemTime(mockedDate);
+
+    const api = new SearchRepositoriesApi(ApiMock);
+
+    const expectedDate = "2023-01-01T00:00:00.000Z";
+    const expectedSort = "stars";
+    const expectedOrder = "desc";
+    const expectedLanguage = "javascript";
+
+    // ACT:
+    api.getTrendingRepositories(undefined, [expectedLanguage]);
+
+    // ASSERT:
+    expect(ApiMock.get).toBeCalledTimes(1);
+    expect(ApiMock.get).toBeCalledWith(
+      encodeURI(
+        `https://api.github.com/search/repositories?q=created:>${expectedDate}+language:${expectedLanguage}&page=1&per_page=10&sort=${expectedSort}&order=${expectedOrder}`
+      )
+    );
+  });
 });

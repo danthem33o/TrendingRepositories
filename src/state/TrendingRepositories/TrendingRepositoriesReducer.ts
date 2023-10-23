@@ -43,6 +43,22 @@ export const TrendingRepositoriesReducer = (
         favourites,
       };
     }
+    case "FILTER_BY_LANGUAGES": {
+      const { languages } = action.payload;
+
+      return {
+        ...state,
+        languages,
+      };
+    }
+    case "SET_TRENDING": {
+      const { trending } = action.payload;
+
+      return {
+        ...state,
+        trending,
+      };
+    }
     default:
       return state;
   }
