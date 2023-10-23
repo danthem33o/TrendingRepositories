@@ -70,21 +70,10 @@ export class LocalStoragApi implements ApiClient {
     url: string,
     request?: TRequest | undefined
   ): Promise<TResponse> {
-    switch (url) {
-      case `https://api.github.com/user/starred/${
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (request as any)?.ownerName
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }/${(request as any)?.repoName}`: {
-        addFavourite(request as StarredRepository);
-
-        break;
-      }
-      default: {
-        localStorage.setItem(DEFAULT_KEY, JSON.stringify(request));
-
-        break;
-      }
+    if (url.match("https://api.github.com/user/starred/")) {
+      addFavourite(request as StarredRepository);
+    } else {
+      localStorage.setItem(DEFAULT_KEY, JSON.stringify(request));
     }
 
     return new Promise((resolve) => resolve({} as TResponse));
