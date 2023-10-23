@@ -25,6 +25,11 @@ export class Qualifiers {
     return this;
   }
 
+  public repo(owner: string, repo: string) {
+    this.addQualifier(`repo:${owner}/${repo}`);
+    return this;
+  }
+
   public build() {
     return this.base;
   }

@@ -38,7 +38,7 @@ describe("useFavouritedSelector", () => {
             },
           },
         ],
-        favourites: [1],
+        favourites: expected,
       },
       dispatch: jest.fn(),
     });

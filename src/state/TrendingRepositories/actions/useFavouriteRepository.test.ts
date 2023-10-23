@@ -3,6 +3,7 @@ import * as StateProvider from "../../context/StateProvider";
 import { useFavouriteRepository } from "./useFavouriteRepository";
 import * as Mutation from "../../../queries/useStarRepositoryMutation";
 import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitialState";
+import { Repository } from "../types";
 
 jest.mock("../../../queries/useStarRepositoryMutation");
 
@@ -21,7 +22,17 @@ describe("useFavouriteRepository", () => {
 
     const mutationSpy = jest.spyOn(Mutation, "useStarRepositoryMutation");
 
-    const expected = 1;
+    const expected: Repository = {
+      id: 1,
+      name: "1",
+      url: "1",
+      description: "1",
+      stars: 0,
+      createdAt: "-",
+      owner: {
+        name: "-",
+      },
+    };
 
     // ACT:
     renderHook(() => useFavouriteRepository(expected));
@@ -36,7 +47,7 @@ describe("useFavouriteRepository", () => {
       expect(mutationSpy).toBeCalledWith(
         mockDispatch({
           type: "FAVOURITE",
-          payload: { repositoryId: expected },
+          payload: { repository: expected },
         })
       );
     });

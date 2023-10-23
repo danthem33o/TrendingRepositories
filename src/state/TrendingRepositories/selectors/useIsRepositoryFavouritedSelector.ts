@@ -6,7 +6,7 @@ export const useIsRepositoryFavouritedSelector = () => {
 
   return useCallback(
     (id: number) => {
-      return !!~state.favourites.indexOf(id);
+      return !!~state.favourites.findIndex((s) => s.id === id);
     },
     [state.favourites]
   );

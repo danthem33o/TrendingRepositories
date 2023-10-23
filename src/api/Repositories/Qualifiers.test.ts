@@ -29,4 +29,12 @@ describe("Qualifiers", () => {
     // ASSERT:
     expect(qualifiers).toBe(`language:javascript+language:C`);
   });
+
+  test("Creates a 'repo' qualifier", () => {
+    // ACT:
+    const qualifiers = new Qualifiers().repo("ownerName", "repoName").build();
+
+    // ASSERT:
+    expect(qualifiers).toBe(`repo:ownerName/repoName`);
+  });
 });

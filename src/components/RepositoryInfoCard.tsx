@@ -13,32 +13,23 @@ import LinkIcon from "@mui/icons-material/Link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { Repository } from "../state/TrendingRepositories/types";
 
 export interface RepositoryInfoCardProps {
-  id: number;
-  name: string;
-  ownerName: string;
-  githubLink: string;
-  description: string;
-  numberOfStars: number;
+  repository: Repository;
 }
 
-export const RepositoryInfoCard = ({
-  id,
-  name,
-  ownerName,
-  githubLink,
-  numberOfStars,
-  description,
-}: RepositoryInfoCardProps) => {
+export const RepositoryInfoCard = ({ repository }: RepositoryInfoCardProps) => {
+  const { id, name, owner, url, stars, description } = repository;
+
   const {
     useFavouriteRepository,
     useUnfavouriteRepository,
     checkIsFavourited,
   } = useTrendingRepositories();
 
-  const favouriteQuery = useFavouriteRepository(id);
-  const unFavouriteQuery = useUnfavouriteRepository(id);
+  const favouriteQuery = useFavouriteRepository(repository);
+  const unFavouriteQuery = useUnfavouriteRepository(repository);
 
   const isFavourited = useMemo(
     () => checkIsFavourited(id),
@@ -47,11 +38,11 @@ export const RepositoryInfoCard = ({
 
   const onFavourited = useCallback(() => {
     if (isFavourited) {
-      unFavouriteQuery.mutate({ ownerName, repoName: name });
+      unFavouriteQuery.mutate({ ownerName: owner.name, repoName: name });
     } else {
-      favouriteQuery.mutate({ ownerName, repoName: name });
+      favouriteQuery.mutate({ ownerName: owner.name, repoName: name });
     }
-  }, [isFavourited, unFavouriteQuery, ownerName, name, favouriteQuery]);
+  }, [isFavourited, unFavouriteQuery, owner.name, name, favouriteQuery]);
 
   return (
     <Card
@@ -70,7 +61,7 @@ export const RepositoryInfoCard = ({
           <IconButton
             aria-label="Repository link"
             title="Open repository in new tab"
-            href={githubLink}
+            href={url}
             target="_blank"
             rel="noreferrer"
           >
@@ -100,10 +91,10 @@ export const RepositoryInfoCard = ({
           sx={{ flexGrow: 1 }}
         >
           <Chip
-            label={numberOfStars}
+            label={stars}
             icon={<StarBorderIcon />}
             variant="outlined"
-            title={`Starred ${numberOfStars} times`}
+            title={`Starred ${stars} times`}
           />
         </Typography>
         <IconButton

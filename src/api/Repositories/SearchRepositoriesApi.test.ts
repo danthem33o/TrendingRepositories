@@ -98,7 +98,9 @@ describe("SearchRepositoriesApi", () => {
     const expectedLanguage = "javascript";
 
     // ACT:
-    api.getTrendingRepositories(undefined, [expectedLanguage]);
+    api.getTrendingRepositories({
+      languages: [expectedLanguage],
+    });
 
     // ASSERT:
     expect(ApiMock.get).toBeCalledTimes(1);

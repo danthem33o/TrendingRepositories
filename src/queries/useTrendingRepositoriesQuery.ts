@@ -7,7 +7,6 @@ export const useTrendingRepositoriesQuery = (languages?: string[]) => {
 
   return useQuery({
     queryKey: ["trending-repositories", languages],
-    queryFn: async () =>
-      await api.getTrendingRepositories(undefined, languages),
+    queryFn: async () => await api.getTrendingRepositories({ languages }),
   });
 };

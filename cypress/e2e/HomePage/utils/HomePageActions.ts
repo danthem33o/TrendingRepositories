@@ -1,7 +1,6 @@
 export const HomePageActions = {
   visit: () => {
     cy.init().visit("/");
-    cy.wait("@searchRepositories");
   },
   filter: (language: string) => {
     cy.findByLabelText("Select languages").type(language + "{enter}");

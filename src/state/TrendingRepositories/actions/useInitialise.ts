@@ -6,7 +6,7 @@ import { trendingRepositoriesInitialState } from "../trendingRepositoriesInitial
 export const useInitialise = () => {
   const { dispatch } = useStateContext();
   return useCallback(
-    (trending: Repository[], favourites: number[]) => {
+    (trending: Repository[], favourites: Repository[]) => {
       dispatch({
         type: "TRENDING_INIT",
         payload: {
