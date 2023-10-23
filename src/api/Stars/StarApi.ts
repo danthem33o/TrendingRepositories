@@ -24,6 +24,13 @@ export class StarApi {
     return this.api.put(encodeURI(url), { ownerName, repoName });
   }
 
+  /**
+   *  Unstars a repository
+   *
+   * @param ownerName The owner of the repository
+   * @param repoName The name of the repository
+   * @returns Promise
+   */
   public unstarARepository(ownerName: string, repoName: string) {
     const url = this.baseUrl + `/${ownerName}/${repoName}`;
     return this.api.delete(url);

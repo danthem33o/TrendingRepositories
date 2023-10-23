@@ -3,29 +3,20 @@ import * as TrendingQuery from "../../../queries/useTrendingRepositoriesQuery";
 import * as State from "../../../state/TrendingRepositories/hooks/useTrendingRepositories";
 import { useOnFilterByLanguage } from "./useOnFilterByLanguage";
 
+jest.mock("../../../queries/useTrendingRepositoriesQuery");
+jest.mock("../../../state/TrendingRepositories/hooks/useTrendingRepositories");
+
 describe("useOnFilterByLanguage", () => {
   test("should filter the trending repositories by language", () => {
     // ARRANGE:
     const setTrendingMock = jest.fn();
 
-    const useTrendingRepositoriesQueryRest = jest.requireActual(
-      "../../../queries/useTrendingRepositoriesQuery"
-    );
-
-    const useTrendingRepositoriesRest = jest.requireActual(
-      "../../../state/TrendingRepositories/hooks/useTrendingRepositories"
-    );
-
-    jest.spyOn(TrendingQuery, "useTrendingRepositoriesQuery").mockReturnValue({
-      __esModule: true,
-      ...useTrendingRepositoriesQueryRest,
+    (TrendingQuery.useTrendingRepositoriesQuery as jest.Mock).mockReturnValue({
       isSuccess: true,
       isLoading: false,
     });
 
-    jest.spyOn(State, "useTrendingRepositories").mockReturnValue({
-      __esModule: true,
-      ...useTrendingRepositoriesRest,
+    (State.useTrendingRepositories as jest.Mock).mockReturnValue({
       setTrending: setTrendingMock,
       languages: [],
     });
